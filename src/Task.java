@@ -50,6 +50,6 @@ public class Task {
     public String toString() {
         String s = "личная";
         if (!isPersonalTask) s = "рабочая";
-        return id + "   " + title + ": " + category + "\nТип задачи: " + s;
+        return id + "   " + title + ": " + category + "\n Тип задачи: " + s;
     }
 }

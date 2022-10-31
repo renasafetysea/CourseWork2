@@ -56,13 +56,13 @@ public class Dispatcher {
     }
 
     public LocalDateTime createDateTime(Scanner scanner) {
-        System.out.print("Введите время и дату выполнения:\nвремя в формате чч:мм:");
+        System.out.print("Введите время и дату :\nвремя в формате чч:мм:");
         LocalTime localTime = LocalTime.parse(scanner.nextLine());
         return createDate(scanner).atTime(localTime);
     }
 
     public LocalDate createDate(Scanner scanner) {
-        System.out.print("Введите дату выполнения в формате гггг-мм-дд:");
+        System.out.print("Введите дату в формате гггг-мм-дд:");
         return LocalDate.parse(scanner.nextLine());
     }
 
@@ -81,7 +81,7 @@ public class Dispatcher {
     }
 
     public int requestId(Scanner scanner) throws Exception {
-        System.out.println("Введите ID задачи, которую хотите удалить");
+        System.out.println("Введите ID задачи, которую нужно удалить");
         int id;
         if (scanner.hasNextInt()) {
             id = scanner.nextInt();

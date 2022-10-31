@@ -14,7 +14,7 @@ public class TaskService <S extends Task & Repetable> {
         removedTasks.put(id, service.get(id));
         service.remove(id);
     }
-    public void printTodoListForDay(LocalDate date) {
+    public void printTodoListForDay (LocalDate date) {
         for (S value : service.values()) {
             if (value.getNextTask() != null && value.getNextTask().toLocalDate().equals(date)) {
                 System.out.println(value);

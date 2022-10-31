@@ -16,6 +16,6 @@ public class AnnualTask extends Task implements Repetable{
 
     @Override
     public String toString() {
-        return super.toString() + "\nБлижайшее актуальное время выполнения: " + getNextTask() + '\n';
+        return super.toString() + "\nБлижайшее время выполнения: " + getNextTask() + '\n';
     }
 }

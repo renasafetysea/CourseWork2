@@ -14,6 +14,6 @@ public class SingleTask extends Task implements Repetable{
 
     @Override
     public String toString() {
-        return super.toString() + "\nВремя выполнения: " + getNextTask() + '\n';
+        return super.toString() + "\n Время выполнения: " + getNextTask() + '\n';
     }
 }

@@ -1,28 +1,32 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Task {
+public abstract class Task {
     private static int idCounter = 0;
     private final Integer id = idCounter++;
     private String title;
     private String category;
-    private final LocalDateTime deadline;
+    private final LocalDateTime dateTime;
     private final Boolean isPersonalTask;
 
-    public Task(String title, String category, LocalDateTime deadline,
+    public Task(String title, String category, LocalDateTime dateTime,
                 Boolean isPersonalTask) {
         setTitle(title);
         setCategory(category);
-        this.deadline = deadline;
+        this.dateTime = dateTime;
         this.isPersonalTask = isPersonalTask;
     }
 
     public Integer getId() {
         return id;
     }
+    public boolean appearsIn(){
+        return false;
+    }
 
-    protected LocalDateTime getDeadline() {
-        return deadline;
+    protected LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     public void setTitle(String title) {
@@ -32,6 +36,7 @@ public class Task {
     public void setCategory(String category) {
         this.category = category;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -45,6 +50,8 @@ public class Task {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public abstract boolean appearsIn(LocalDate dateForChecking);
 
     @Override
     public String toString() {

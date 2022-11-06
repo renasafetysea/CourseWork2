@@ -6,51 +6,51 @@ import java.util.Scanner;
 public class Dispatcher {
     TaskService service = new TaskService();
 
-    public void inputTask(Scanner scanner) throws Exception {
+    public void inputTask(Scanner scanner) throws IllegalArgumentException {
         System.out.print("Укажите повторяемость:\n1 - однократная\n2 - ежедневная\n3 - еженедельная\n" +
                 "4 - ежемесячная\n5 - ежегодная\n");
         int repeatability = Integer.parseInt(scanner.nextLine());
         Task task;
         String name = createName(scanner);
         String descr = createDescription(scanner);
-        LocalDateTime deadline = createDateTime(scanner);
+        LocalDateTime dateTime = createDateTime(scanner);
         boolean type = createType(scanner);
         switch (repeatability) {
             case 1:
-                task = new SingleTask(name, descr, deadline, type);
+                task = new SingleTask(name, descr, dateTime, type);
                 break;
             case 2:
-                task = new DailyTask(name, descr, deadline, type);
+                task = new DailyTask(name, descr, dateTime, type);
                 break;
             case 3:
-                task = new WeeklyTask(name, descr, deadline, type);
+                task = new WeeklyTask(name, descr, dateTime, type);
                 break;
             case 4:
-                task = new MonthlyTask(name, descr, deadline, type);
+                task = new MonthlyTask(name, descr, dateTime, type);
                 break;
             case 5:
-                task = new AnnualTask(name, descr, deadline, type);
+                task = new AnnualTask(name, descr, dateTime, type);
                 break;
             default:
-                throw new Exception("Неверная повторяемость");
+                throw new IllegalArgumentException("Неверная повторяемость");
         }
         service.addTask(task);
     }
 
-    public String createName(Scanner scanner) throws Exception {
+    private String createName(Scanner scanner) throws IllegalArgumentException {
         System.out.print("Введите название задачи: ");
         String taskName = scanner.nextLine();
         if (taskName == null || taskName.isBlank()) {
-            throw new Exception("Пустое название задачи");
+            throw new IllegalArgumentException("Пустое название задачи");
         }
         return taskName;
     }
 
-    public String createDescription(Scanner scanner) throws Exception {
+    private String createDescription(Scanner scanner) throws IllegalArgumentException {
         System.out.print("Введите описание задачи: ");
         String taskDescription = scanner.nextLine();
         if (taskDescription == null || taskDescription.isBlank()) {
-            throw new Exception("Пустое описание задачи");
+            throw new IllegalArgumentException("Пустое описание задачи");
         }
         return taskDescription;
     }
@@ -66,32 +66,32 @@ public class Dispatcher {
         return LocalDate.parse(scanner.nextLine());
     }
 
-    public boolean createType(Scanner scanner) throws Exception {
+    public boolean createType(Scanner scanner) throws IllegalArgumentException {
         System.out.print("Выберите тип задачи:\n1 - личная\n2 - рабочая\n");
         int type = Integer.parseInt(scanner.nextLine());
         if (type == 1) {
             return true;
         } else if (type == 2) {
             return false;
-        } else throw new Exception("Неверно введен тип задачи");
+        } else throw new IllegalArgumentException("Неверно введен тип задачи");
     }
 
     public void deleteTask(Scanner scanner) throws Exception {
         service.deleteTask(requestId(scanner));
     }
 
-    public int requestId(Scanner scanner) throws Exception {
+    public int requestId(Scanner scanner) throws IllegalArgumentException {
         System.out.println("Введите ID задачи, которую нужно удалить");
         int id;
         if (scanner.hasNextInt()) {
             id = scanner.nextInt();
         } else {
-            throw new Exception("Некорректный ID");
+            throw new IllegalArgumentException("Некорректный ID");
         }
         return id;
     }
 
-    public void getTasksForDay(Scanner scanner) throws Exception {
+    public void getTasksForDay(Scanner scanner) throws IllegalArgumentException {
         System.out.println("Введите дату:");
         service.printTodoListForDay(createDate(scanner));
     }

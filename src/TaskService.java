@@ -10,16 +10,21 @@ public class TaskService <S extends Task & Repetable> {
     public void addTask(S task) {
         service.put(task.getId(), task);
     }
-    public void deleteTask(int id) {
-        removedTasks.put(id, service.get(id));
-        service.remove(id);
+    public void deleteTask(int id) throws IllegalAccessException {
+        if (removedTasks.containsKey(id)){
+            throw new IllegalAccessException("Задача с id " +
+                    id + " не найдена.");
+        } else {service.remove(id);
+            System.out.println("Задача с id " + id + " удалена.");
+        }
     }
-    public void printTodoListForDay (LocalDate date) {
+    public LocalDate printTodoListForDay (LocalDate date) {
         for (S value : service.values()) {
             if (value.getNextTask() != null && value.getNextTask().toLocalDate().equals(date)) {
                 System.out.println(value);
             }
         }
+        return date;
     }
 
 }

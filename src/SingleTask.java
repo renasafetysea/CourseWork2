@@ -1,19 +1,19 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class SingleTask extends Task implements Repetable{
-    public SingleTask(String title, String category, LocalDateTime deadline, Boolean isPersonalTask) {
-        super(title, category, deadline, isPersonalTask);
+public class SingleTask extends Task{
+    public SingleTask(String title, String category, LocalDateTime dateTime, Boolean isPersonalTask) {
+        super(title, category, dateTime, isPersonalTask);
     }
 
     @Override
-    public LocalDateTime getNextTask() {
-        if (LocalDateTime.now().isBefore(getDeadline())) {
-            return getDeadline();
-        } else return null;
+    public boolean appearsIn(LocalDate dateForChecking) {
+        return (dateForChecking.isAfter
+                (getDateTime().toLocalDate()) || dateForChecking.isEqual(getDateTime().toLocalDate()))
+                && dateForChecking.getDayOfMonth() == getDateTime().getDayOfMonth();
     }
-
-    @Override
+       @Override
     public String toString() {
-        return super.toString() + "\nВремя выполнения: " + getNextTask() + '\n';
+        return super.toString() + "\n Время выполнения: " + getDateTime() + '\n';
     }
 }

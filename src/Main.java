@@ -26,18 +26,18 @@ public class Main {
                             break label;
                     }
                 }
-            } catch (DateTimeException dte) {
+            } catch (IncorrectArgumentException incorrectArgumentException) {
                 System.out.println("Введите дату и время в правильном формате чч:мм гггг-мм-дд");
-            } catch (Exception e) {
+            } catch (TaskNotFoundException taskNotFoundException) {
                 scanner.nextLine();
-                System.out.println(e.getMessage());
+                System.out.println(taskNotFoundException.getMessage());
             }
         }
     }
 
     private static void printMenu() {
         System.out.println(
-                "1. Добавить задачу\n2. Удалить задач\n3. Получить задачи на день\n"+
+                "1. Добавить задачу\n2.  Удалить задач\n3. Получить задачи на день\n"+
                         " \n0. Выход ");
     }
 }

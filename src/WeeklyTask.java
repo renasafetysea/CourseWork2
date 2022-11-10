@@ -1,20 +1,20 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class WeeklyTask extends Task implements Repetable{
-    public WeeklyTask(String title, String category, LocalDateTime deadline, Boolean isPersonalTask) {
-        super(title, category, deadline, isPersonalTask);
+public class WeeklyTask extends Task {
+    public WeeklyTask(String title, String category, LocalDateTime dateTime, Boolean isPersonalTask) {
+        super(title, category, dateTime, isPersonalTask);
     }
 
     @Override
-    public LocalDateTime getNextTask() {
-        LocalDateTime  deadline = getDeadline();
-        while (LocalDateTime.now().isAfter(deadline)) {
-            deadline = deadline.plusWeeks(1);
-        }
-        return deadline;
+    public boolean appearsIn(LocalDate dateForChecking) {
+        return (dateForChecking.isAfter
+                (getDateTime().toLocalDate()) || dateForChecking.isEqual(getDateTime().toLocalDate()))
+                && dateForChecking.getDayOfWeek() == getDateTime().getDayOfWeek();
     }
+
     @Override
     public String toString() {
-        return super.toString() + "\nБлижайшее актуальное время выполнения: " + getNextTask() + '\n';
+        return super.toString() + "\nБлижайшее время выполнения: " + getDateTime() + '\n';
     }
 }

@@ -26,11 +26,11 @@ public class Main {
                             break label;
                     }
                 }
-            } catch (DateTimeException dte) {
+            } catch (IncorrectArgumentException incorrectArgumentException) {
                 System.out.println("Введите дату и время в правильном формате чч:мм гггг-мм-дд");
-            } catch (Exception e) {
+            } catch (TaskNotFoundException taskNotFoundException) {
                 scanner.nextLine();
-                System.out.println(e.getMessage());
+                System.out.println(taskNotFoundException.getMessage());
             }
         }
     }

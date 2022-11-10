@@ -18,11 +18,16 @@ public abstract class Task {
         this.isPersonalTask = isPersonalTask;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
     public Integer getId() {
         return id;
-    }
-    public boolean appearsIn(){
-        return false;
     }
 
     protected LocalDateTime getDateTime() {
@@ -38,6 +43,9 @@ public abstract class Task {
     }
 
 
+    public abstract boolean appearsIn(LocalDate dateForChecking);
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,7 +59,6 @@ public abstract class Task {
         return Objects.hash(id);
     }
 
-    public abstract boolean appearsIn(LocalDate dateForChecking);
 
     @Override
     public String toString() {
